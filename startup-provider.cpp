@@ -1,5 +1,119 @@
 #include<bits/stdc++.h>
+#include<stdlib.h>
 using namespace std;
+
+  int checknumber(string c)
+  {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=48 && c[i]-0<=57)))
+          return 1;
+    }
+  }
+
+  int checkage(string c)
+  {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=48 && c[i]-0<=57)))
+    {
+      cout<<"Age can contain only numbers."<<endl;
+      cout<<"Please enter correct age"<<endl;
+      cout<<endl;
+      return 1;
+    }
+  }
+}
+
+  int checkcontact(string c)
+  {
+    int flag=0;
+    if((c.size()==10))
+    {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=48 && c[i]-0<=57)))
+      {
+        cout<<"Contact can contain only numbers."<<endl;
+        cout<<"Please enter correct contact number(size 10)"<<endl;
+        cout<<endl;
+        return 1;
+      }
+    }
+  }
+      else
+      {
+        cout<<"Contact can contain only numbers."<<endl;
+        cout<<"Please enter correct contact number(size 10)"<<endl;
+        cout<<endl;
+        return 1;
+      }
+  }
+
+
+  int checkname(string c)
+  {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=65 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
+    {
+      cout<<"Name can contain only alphabets."<<endl;
+      cout<<"Please enter correct name"<<endl;
+      cout<<endl;
+      return 1;
+    }
+  }
+}
+
+  int checkcity(string c)
+  {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=65 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
+    {
+      cout<<"City can contain only alphabets."<<endl;
+      cout<<"Please enter correct city"<<endl;
+      cout<<endl;
+      return 1;
+    }
+  }
+}
+
+  int checkstate(string c)
+  {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=65 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
+    {
+      cout<<"State can contain only alphabets."<<endl;
+      cout<<"Please enter correct state"<<endl;
+      cout<<endl;
+      return 1;
+    }
+  }
+}
+
+  int checkemailid(string c)
+  {
+    int flag=0;
+    for(int i=0;i<c.size();i++)
+    {
+        if(((c[i]-0>=64 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
+        {
+          if(c[i]=='@')
+            flag=1;
+        }
+      }
+        if(flag!=1)
+        {
+          cout<<"Invalid Email-ID."<<endl;
+          cout<<"Please enter correct Email-ID"<<endl;
+          cout<<endl;
+          return 1;
+        }
+    }
+
+
 
 class Company_freelancer
 {
@@ -8,7 +122,7 @@ class Company_freelancer
         string lastName;
         string emailid;
         string contact;
-        string Dob;
+        string age;
         string city;
         string state;
         string interest_tag;
@@ -25,24 +139,48 @@ class Company_freelancer
     }
     void getInfo()
     {
-        cout<<"enter your first name"<<endl;
+      do{
+        cout<<"Enter First Name:";
         cin>>firstName;
-        cout<<"enter your last name"<<endl;
+      }
+      while(checkname(firstName));
+      do{
+        cout<<"Enter Last Name:";
         cin>>lastName;
-        cout<<"enter your email id"<<endl;
-        cin>>emailid;
-        cout<<"enter your contact details"<<endl;
+      }
+      while(checkname(lastName));
+      do{
+        cout<<"Enter your Contact No:";
         cin>>contact;
-        cout<<"enter your date of birth"<<endl;
-        cin>>Dob;
-        cout<<"enter the name of city you are from"<<endl;
+      }
+      while(checkcontact(contact));
+      do{
+        cout<<"Enter your email ID:";
+        cin>>emailid;
+      }
+      while(checkemailid(emailid));
+      do{
+        cout<<"Enter your age:";
+        cin>>age;
+      }
+      while(checkage(age));
+      do{
+        cout<<"Enter City:";
         cin>>city;
-        cout<<"enter the state you are from"<<endl;
+      }
+      while(checkcity(city));
+      do{
+        cout<<"Enter State:";
         cin>>state;
-        cout<<"share your interests"<<endl;
+      }
+      while(checkstate(state));
+      do{
+        cout<<"Enter Interest:";
         cin>>interest_tag;
+      }
+      while(checkname(interest_tag));
     }
-//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
+
     void printfInfo()
     {
         cout<<endl<<"information regarding the company are as follows"<<endl;
@@ -50,7 +188,7 @@ class Company_freelancer
         cout<<lastName<<endl;
         cout<<emailid<<endl;
         cout<<contact<<endl;
-        cout<<Dob<<endl;
+        cout<<age<<endl;
         cout<<city<<endl;
         cout<<state<<endl;
         cout<<interest_tag<<endl<<endl;
@@ -63,7 +201,7 @@ class startupUser{
         string lastName;
         string emailid;
         string contact;
-        string Dob;
+        string age;
         string city;
         string state;
         string interest_tag;
@@ -81,22 +219,46 @@ class startupUser{
     }
     void getInfo()
     {
-        cout<<"enter your first name"<<endl;
-        cin>>firstName;
-        cout<<"enter your last name"<<endl;
-        cin>>lastName;
-        cout<<"enter your email id"<<endl;
-        cin>>emailid;
-        cout<<"enter your contact details"<<endl;
-        cin>>contact;
-        cout<<"enter your date of birth"<<endl;
-        cin>>Dob;
-        cout<<"enter the name of city you are from"<<endl;
-        cin>>city;
-        cout<<"enter the state you are from"<<endl;https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
-        cin>>state;
-        cout<<"share your interests"<<endl;
-        cin>>interest_tag;
+        do{
+          cout<<"Enter First Name:";
+          cin>>firstName;
+        }
+        while(checkname(firstName));
+        do{
+          cout<<"Enter Last Name:";
+          cin>>lastName;
+        }
+        while(checkname(lastName));
+        do{
+          cout<<"Enter your Contact No:";
+          cin>>contact;
+        }
+        while(checkcontact(contact));
+        do{
+          cout<<"Enter your email ID:";
+          cin>>emailid;
+        }
+        while(checkemailid(emailid));
+        do{
+          cout<<"Enter your age:";
+          cin>>age;
+        }
+        while(checkage(age));
+        do{
+          cout<<"Enter City:";
+          cin>>city;
+        }
+        while(checkcity(city));
+        do{
+          cout<<"Enter State:";
+          cin>>state;
+        }
+        while(checkstate(state));
+        do{
+          cout<<"Enter Interest:";
+          cin>>interest_tag;
+        }
+        while(checkname(interest_tag));
     }
 
     void printfInfo()
@@ -106,7 +268,7 @@ class startupUser{
         cout<<lastName<<endl;
         cout<<emailid<<endl;
         cout<<contact<<endl;
-        cout<<Dob<<endl;
+        cout<<age<<endl;
         cout<<city<<endl;
         cout<<state<<endl;
         cout<<interest_tag<<endl<<endl;
@@ -270,6 +432,8 @@ void admin::Display(string interest)
 }
 int main()
 {
+
+  system("python test1.py");
     string c;
     Company_freelancer B;
     startupUser A;
@@ -310,7 +474,7 @@ int main()
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
                     fp = fopen("companyregdetails.txt","a");
-                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.Dob.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.age.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
                     fclose(fp);
                     break;
         	}
@@ -334,7 +498,7 @@ int main()
            	 	    fprintf(fp,"%s %s\n",A.uid.c_str(),A.password.c_str());
             		fclose(fp);
                     fp = fopen("startupregdetails.txt","a");
-                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.Dob.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.age.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
                     fclose(fp);
                     break;
         	}
