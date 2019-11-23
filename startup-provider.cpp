@@ -12,7 +12,6 @@ class Company_freelancer
         string city;
         string state;
         string interest_tag;
-
     public:
         string uid;
         string password;
@@ -160,9 +159,11 @@ class admin:public Company_freelancer,public startupUser
         {
             FILE *fp;
             string Check_uid;
+            FILE *fpl;
             char cuid[25];
             char cpass[25];
             fp = fopen("startupdatabase.txt","r");
+            fpl = fopen("startupregdetails.txt","r");
             int n;
             fscanf(fp,"%d",&n);
             int i;
@@ -180,6 +181,25 @@ class admin:public Company_freelancer,public startupUser
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
+                     //string interest,iter;
+                     char interest1[25],iter1[25];
+                     fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<i;j++)
+                         for(int k=0;k<8;k++)
+                            fscanf(fpl,"%s",iter1);
+
+                     //std::string iter(iter1);
+                     //cout<<iter<<endl;
+
+                     for(int j=0;j<8;j++)
+                        fscanf(fpl,"%s",interest1);
+
+                        //fscanf(fpl,"%s",interest1);
+                        std::string interest(interest1);
+                        cout<<interest<<endl;
+                     fclose(fp);
+                     fclose(fpl);
+                     Display(interest);
                      break;
                     }
                 }//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
@@ -188,6 +208,66 @@ class admin:public Company_freelancer,public startupUser
                 cout<<"Error: Uid "<<Check_uid<<" invalid"<<endl;
         }
 };
+
+void admin::Display(string interest) 
+{
+            FILE *fp;
+            fp = fopen("companyregdetails.txt","r+");
+            
+            
+            /*ofstream fout;
+            string eashan;
+            fout.open("textfile.txt");
+            std::map<string,std::vector<pair<string,int> > >m;
+            while(fout)
+            {
+                getline(cin,eashan);
+                if(eashan=="-1")
+                {
+                    break;
+                }
+                string temp="";
+                std::vector<string> v;
+                for(int i=0;i<eashan.length();i++)
+                {
+                    
+                    if(eashan[i]==' ')
+                    {
+                        if(temp!=" ")
+                        v.push_back(temp);
+                        temp="";
+                    }
+                    else
+                        temp+=eashan[i];
+                }
+                for(int i=0;i<v.size();i++)
+                {
+                    if(v[i]=="marketing")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="accounting")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="technical")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="advertisement")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+
+                }
+            }
+            fout.close();
+            fclose(fp);*/
+}
 int main()
 {
     string c;
@@ -272,7 +352,7 @@ int main()
 		{
         		S.getUid();
                 S.check_pass_company();
-                
+
 			break;
 		}
 		if(s == "startup-user")
