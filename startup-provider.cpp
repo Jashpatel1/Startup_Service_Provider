@@ -233,6 +233,64 @@ int main()
                     fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.Dob.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
                     fclose(fp);
                     break;
+			
+			
+			
+		ofstream fout;
+            string eashan;
+            fout.open("textfile.txt");
+            std::map<string,std::vector<pair<string,int> > >m;
+            while(fout)
+            {
+                getline(cin,eashan);
+                if(eashan=="-1")
+                {
+                    break;
+                }
+                string temp="";
+                std::vector<string> v;
+                for(int i=0;i<eashan.length();i++)
+                {
+                    
+                    if(eashan[i]==' ')
+                    {
+                        if(temp!=" ")
+                        v.push_back(temp);
+                        temp="";
+                    }
+                    else
+                        temp+=eashan[i];
+                }
+                for(int i=0;i<v.size();i++)
+                {
+                    if(v[i]=="marketing")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="accounting")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="technical")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="advertisement")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+
+                }
+            }
+            fout.close();
+            fclose(fp);
+			
+			
+			
         	}
         	if(s == "startup-user")
         	{
