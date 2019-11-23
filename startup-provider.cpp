@@ -135,7 +135,15 @@ class Company_freelancer
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         cout<<"enter the password you want to set"<<endl;
-        cin>>password;
+        for(int i=0;i<1000;i++)
+        {
+          char c=getch();
+          if(c=='\r')
+            break;
+          cout<<"*";
+          password[i]=c;
+         }
+         cout<<endl;
     }
     void getInfo()
     {
@@ -215,7 +223,15 @@ class startupUser{
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         cout<<"enter the password you want to set"<<endl;
-        cin>>password;
+        for(int i=0;i<1000;i++)
+        {
+          char c=getch();
+          if(c=='\r')
+            break;
+          cout<<"*";
+          password[i]=c;
+         }
+         cout<<endl;
     }
     void getInfo()
     {
