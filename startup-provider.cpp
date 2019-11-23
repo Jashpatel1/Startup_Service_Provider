@@ -197,7 +197,7 @@ int main()
     cout<<"have you registered yet?(Y/N)"<<endl;
     cin>>c;
     while(1)
-    {	
+    {
     if(c  == "N" || c == "n")
     {
         cout<<"do you want to register as company or startup-user"<<endl;
@@ -210,19 +210,29 @@ int main()
             		B.set_uid();
             		B.getInfo();
             		B.printfInfo();
+
             		cout<<"congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp;
-            		fp = fopen("companydatabase.txt","w");
-            /*//fputs(B.uid,fp);
-            //fputs(B.password,fp);
-https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
-            //cout<<"here is your uid "<<B.uid<<endl;*/
+            		FILE *fpl;
+            		fp = fopen("companydatabase.txt","r+");
+                    fpl = fopen("companyregdetails.txt","r+");
+                    int qw;
+            		fscanf(fp,"%d",&qw);
+            		//cout<<qw<<endl;
+            		fseek(fp,0,SEEK_SET);
+            		fseek(fpl,0,SEEK_SET);
+            		//cout<<qw<<endl;
+            		fprintf(fpl,"%d\n",qw+1);
+            		fprintf(fp,"%d\n",qw+1);
+            		fclose(fp);
+            		fclose(fpl);
+            		fp = fopen("companydatabase.txt","a");
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
-			fp = fopen("companyregdetails.txt","a");
-			fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.Dob.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
-			fclose(fp);			
-			break;
+                    fp = fopen("companyregdetails.txt","a");
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.Dob.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
+                    fclose(fp);
+                    break;
         	}
         	if(s == "startup-user")
         	{
@@ -230,72 +240,47 @@ https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
             		A.getInfo();
             		A.printfInfo();
             		cout<<"congratulations, you have successfully registered here on our website"<<endl;
-            		FILE *fp;
-            		fp = fopen("startupdatabase.txt","w");
-           	 	fprintf(fp,"%s %s\n",A.uid.c_str(),A.password.c_str());
+            		FILE *fp,*fpl;
+            		fp = fopen("startupdatabase.txt","r+");
+            		fpl = fopen("startupregdetails.txt","r+");
+            		int n;
+            		fscanf(fp,"%d",&n);
+            		fseek(fp,0,SEEK_SET);
+            		fseek(fpl,0,SEEK_SET);
+            		fprintf(fp,"%d\n",n+1);
+            		fprintf(fpl,"%d\n",n+1);
             		fclose(fp);
-			fp = fopen("startupregdetails.txt","a");
-			fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.Dob.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
-			fclose(fp);
-			break;            
-		//fprintf(fp,"this is a test text");
-            //f11=fopen("startupdatabase.txt","r");
-            //string a,b;
-            //fscanf(f11,"%s %s",a,b);
-            //cout<<"meralund "<<a<<b<<endl;
-            //fclose(f11 );
-        	}	
-	}	
+            		fp = fopen("startupdatabase.txt","a");
+           	 	    fprintf(fp,"%s %s\n",A.uid.c_str(),A.password.c_str());
+            		fclose(fp);
+                    fp = fopen("startupregdetails.txt","a");
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.Dob.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
+                    fclose(fp);
+                    break;
+        	}
+	}
 	break;
     	}
     if(c == "Y" || c == "y")
     {
 	while(1)
-	{	
+	{
 		string s;
 		cout<<"are you a company/freelancer or startup-user"<<endl;
 		cin>>s;
 		if(s == "company")
 		{
         		S.getUid();
-               		S.check_pass_company();
+                S.check_pass_company();
+                
 			break;
 		}
 		if(s == "startup-user")
 		{
 			S.getUid();
-			S.check_pass_startup();			
+			S.check_pass_startup();
 			break;
-		}        
-	/*string Uid;
-        cout<<"your userid"<<endl;
-        cin>>Uid;
-        */
-        /*S.getUid();
-        string Password;
-        cout<<"enter password"<<endl;
-        cin>>Password;
-        FILE *fp;
-        string Check_uid;
-        char cuid[25];
-        char cpass[25];
-        int n;
-        fp=fopen("companydatabase.txt","r");
-        fscanf(fp,"%d\n",n);
-        int i;
-        for(i=0;i<n;i++)
-        {
-            fscanf(fp,"%s %s\n",cuid,cpass);
-            std::string Check_uid(cuid);
-            std::string P
-            if(Check_uid == Uid)
-            {
-                if()
-                cout<<"Uid and password verified."<<endl;
-                break;
-            }
-        }
-        */    
+		}
 	}
 	break;
     }
