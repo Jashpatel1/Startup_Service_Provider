@@ -280,7 +280,7 @@ class admin:public Company_freelancer,public startupUser
     public:
     string attempt_uid;
     string attempt_password;
-
+    //void Display(string interest);
         void getUid()
         {
             cout<<"enter the UID of your account"<<endl;
@@ -361,7 +361,7 @@ class admin:public Company_freelancer,public startupUser
                         cout<<interest<<endl;
                      fclose(fp);
                      fclose(fpl);
-                     Display(interest);
+                     //Display(interest);
                      break;
                     }
                 }//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
@@ -370,13 +370,13 @@ class admin:public Company_freelancer,public startupUser
                 cout<<"Error: Uid "<<Check_uid<<" invalid"<<endl;
         }
 };
-
-void admin::Display(string interest) 
+/*
+void admin::Display(string interest)
 {
             FILE *fp;
             fp = fopen("companyregdetails.txt","r+");
-            
-            
+
+
             /*ofstream fout;
             string eashan;
             fout.open("textfile.txt");
@@ -392,7 +392,7 @@ void admin::Display(string interest)
                 std::vector<string> v;
                 for(int i=0;i<eashan.length();i++)
                 {
-                    
+
                     if(eashan[i]==' ')
                     {
                         if(temp!=" ")
@@ -424,12 +424,11 @@ void admin::Display(string interest)
                         m[v[i]].push_back(make_pair(v[0],0));
                         break;
                     }
-
                 }
             }
             fout.close();
             fclose(fp);*/
-}
+
 int main()
 {
 
@@ -438,6 +437,9 @@ int main()
     Company_freelancer B;
     startupUser A;
     admin S;
+    string answer;
+while(1)
+{
     cout<<"have you registered yet?(Y/N)"<<endl;
     cin>>c;
     while(1)
@@ -528,6 +530,11 @@ int main()
 	}
 	break;
     }
+}
+    cout<<"do you want to register again?(Y/N)"<<endl;
+    cin>>answer;
+    if(answer == "N" || answer == "n")
+        break;
 }
     return 0;
 }
