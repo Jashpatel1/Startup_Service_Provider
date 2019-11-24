@@ -135,15 +135,7 @@ class Company_freelancer
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         cout<<"enter the password you want to set"<<endl;
-        for(int i=0;i<1000;i++)
-        {
-          char c=getch();
-          if(c=='\r')
-            break;
-          cout<<"*";
-          password[i]=c;
-         }
-         cout<<endl;
+        cin>>password;
     }
     void getInfo()
     {
@@ -223,15 +215,7 @@ class startupUser{
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         cout<<"enter the password you want to set"<<endl;
-        for(int i=0;i<1000;i++)
-        {
-          char c=getch();
-          if(c=='\r')
-            break;
-          cout<<"*";
-          password[i]=c;
-         }
-         cout<<endl;
+        cin>>password;
     }
     void getInfo()
     {
@@ -296,7 +280,32 @@ class admin:public Company_freelancer,public startupUser
     public:
     string attempt_uid;
     string attempt_password;
-    //void Display(string interest);
+    void Display(string interest)
+    {
+        int n1;
+        char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
+        FILE *fp;
+        fp = fopen("companyregdetails.txt","r+");
+        fscanf(fp,"%d",&n1);
+        for(int i=0;i<n1;i++)
+        {
+            fscanf(fp,"%s%s%s%s%s%s%s%s",s11,s12,s13,s14,s15,s16,s17,s18);
+            std::string ver_interest(s18);
+            //cout<<ver_interest<<endl;
+            if(ver_interest == interest)
+            {
+                std::string comp_name1(s11);
+                std::string comp_name2(s12);
+                std::string comp_name3(s13);
+                std::string comp_name4(s14);
+                std::string comp_name5(s15);
+                std::string comp_name6(s16);
+                std::string comp_name7(s17);
+                cout<<comp_name1<<" "<<comp_name2<<" "<<comp_name3<<" "<<comp_name4<<" "<<comp_name5<<" "<<comp_name6<<" "<<comp_name7<<endl;
+            }
+        }
+        fclose(fp);
+    }
         void getUid()
         {
             cout<<"enter the UID of your account"<<endl;
@@ -377,7 +386,8 @@ class admin:public Company_freelancer,public startupUser
                         cout<<interest<<endl;
                      fclose(fp);
                      fclose(fpl);
-                     //Display(interest);
+                     cout<<"the details of company interested in "<<interest<<"are as follows"<<endl;
+                     Display(interest);
                      break;
                     }
                 }//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
@@ -403,8 +413,7 @@ void admin::Display(string interest)
                 if(eashan=="-1")
                 {
                     break;
-                }
-                string temp="";
+                    string temp="";
                 std::vector<string> v;
                 for(int i=0;i<eashan.length();i++)
                 {
