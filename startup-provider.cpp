@@ -356,18 +356,25 @@ class admin:public Company_freelancer,public startupUser
                 std::string Check_pass(cpass);
                 if(attempt_uid == Check_uid)
                 {
-                    cout<<"enter password"<<endl;
-                    char abc[100];
-                    for(int j=0;j<1000;j++)
+                  cout<<"enter password"<<endl;
+                  char asd[100];
+                  int nn;
+                  for(int j=0;j<1000;j++)
+                  {
+                    char c=getch();
+                    if(c=='\r')
                     {
-                      char c=getch();
-                      if(c=='\r')
-                        break;
-                      cout<<"*";
-                      abc[j]=c;
-                     }
-                     cout<<endl;
-                     std::string attempt_password(abc);
+                      nn=j;
+                      break;
+                    }
+                    cout<<"*";
+                    asd[j]=c;
+                   }
+                   cout<<endl;
+                   char all[nn];
+                   for(int k=0;k<nn;k++)
+                      all[k]=asd[k];
+                   std::string attempt_password(all);
 
                     if(attempt_password == Check_pass)
                     {
@@ -398,18 +405,25 @@ class admin:public Company_freelancer,public startupUser
                 std::string Check_pass(cpass);
                 if(attempt_uid == Check_uid)
                 {
-                    cout<<"enter password"<<endl;
-                    char abc[100];
-                    for(int j=0;j<1000;j++)
+                  cout<<"enter password"<<endl;
+                  char asd[100];
+                  int nn;
+                  for(int j=0;j<1000;j++)
+                  {
+                    char c=getch();
+                    if(c=='\r')
                     {
-                      char c=getch();
-                      if(c=='\r')
-                        break;
-                      cout<<"*";
-                      abc[j]=c;
-                     }
-                     cout<<endl;
-                     std::string attempt_password(abc);
+                      nn=j;
+                      break;
+                    }
+                    cout<<"*";
+                    asd[j]=c;
+                   }
+                   cout<<endl;
+                   char all[nn];
+                   for(int k=0;k<nn;k++)
+                      all[k]=asd[k];
+                   std::string attempt_password(all);
 
                     if(attempt_password == Check_pass)
                     {
