@@ -26,7 +26,7 @@ using namespace std;
   }
 }
 
-  int checkcontact(string c)
+  int checkcontact_startup(string c)
   {
     int flag=0;
     if((c.size()==10))
@@ -41,6 +41,23 @@ using namespace std;
         return 1;
       }
     }
+            int n,i;
+            FILE* fp;
+            fp = fopen("startupregdetails.txt","r+");
+        //string c_uidl;
+            char c_uid[25],c_pass[25],c_email[50],c_contact[20],c_established[20],c_cityofestablished[20],c_state[20],c_interest_tag[20];
+            fscanf(fp,"%d",&n);
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s%s%s%s%s%s%s",c_uid,c_pass,c_email,c_contact,c_established,c_cityofestablished,c_state,c_interest_tag);
+                std::string c_uide(c_contact);
+                if(c == c_uide)
+                {
+                    cout<<"this contact number is already in use,try again"<<endl;
+                    return 1;
+                }
+            }
+            return 0;
   }
       else
       {
@@ -49,8 +66,53 @@ using namespace std;
         cout<<endl;
         return 1;
       }
+
+
   }
 
+    int checkcontact(string c)
+  {
+    int flag=0;
+    if((c.size()==10))
+    {
+    for(int i=0;i<c.size();i++)
+    {
+      if(!((c[i]-0>=48 && c[i]-0<=57)))
+      {
+        cout<<"Contact can contain only numbers."<<endl;
+        cout<<"Please enter correct contact number(size 10)"<<endl;
+        cout<<endl;
+        return 1;
+      }
+    }
+            int n,i;
+            FILE* fp;
+            fp = fopen("companyregdetails.txt","r+");
+            //string c_uidl;
+            char c_uid[25],c_pass[25],c_email[50],c_contact[20],c_established[20],c_cityofestablished[20],c_state[20],c_interest_tag[20];
+            fscanf(fp,"%d",&n);
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s%s%s%s%s%s%s",c_uid,c_pass,c_email,c_contact,c_established,c_cityofestablished,c_state,c_interest_tag);
+                std::string c_uide(c_contact);
+                if(c == c_uide)
+                {
+                    cout<<"this contact number is already in use,try again"<<endl;
+                    return 1;
+                }
+            }
+            return 0;
+
+  }
+      else
+      {
+        cout<<"Contact can contain only numbers."<<endl;
+        cout<<"Please enter correct contact number(size 10)"<<endl;
+        cout<<endl;
+        return 1;
+      }
+
+  }
 
   int checkname(string c)
   {
@@ -102,9 +164,27 @@ using namespace std;
         if(((c[i]-0>=64 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
         {
           if(c[i]=='@')
+           {
             flag=1;
+            int n,i;
+            FILE* fp;
+            fp = fopen("companyregdetails.txt","r+");
+        //string c_uidl;
+            char c_uid[25],c_pass[25],c_email[50],c_contact[20],c_established[20],c_cityofestablished[20],c_state[20],c_interest_tag[20];
+            fscanf(fp,"%d",&n);
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s%s%s%s%s%s%s",c_uid,c_pass,c_email,c_contact,c_established,c_cityofestablished,c_state,c_interest_tag);
+                std::string c_uide(c_email);
+                if(c == c_uide)
+                {
+                    cout<<"this email-id is already in use,try again"<<endl;
+                    return 1;
+                }
+            }
+            }
         }
-      }
+           }
         if(flag!=1)
         {
           cout<<"Invalid Email-ID."<<endl;
@@ -112,8 +192,47 @@ using namespace std;
           cout<<endl;
           return 1;
         }
+    return 0;
     }
 
+int checkemailid_startup(string c)
+  {
+    int flag=0;
+    for(int i=0;i<c.size();i++)
+    {
+        if(((c[i]-0>=64 && c[i]-0<=90) ||(c[i]-0>=97 && c[i]-0<=122)))
+        {
+          if(c[i]=='@')
+           {
+            flag=1;
+            int n,i;
+            FILE* fp;
+            fp = fopen("startupregdetails.txt","r+");
+        //string c_uidl;
+            char c_uid[25],c_pass[25],c_email[50],c_contact[20],c_established[20],c_cityofestablished[20],c_state[20],c_interest_tag[20];
+            fscanf(fp,"%d",&n);
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s%s%s%s%s%s%s",c_uid,c_pass,c_email,c_contact,c_established,c_cityofestablished,c_state,c_interest_tag);
+                std::string c_uide(c_email);
+                if(c == c_uide)
+                {
+                    cout<<"this email-id is already in use,try again"<<endl;
+                    return 1;
+                }
+            }
+            }
+        }
+           }
+        if(flag!=1)
+        {
+          cout<<"Invalid Email-ID."<<endl;
+          cout<<"Please enter correct Email-ID"<<endl;
+          cout<<endl;
+          return 1;
+        }
+    return 0;
+    }
 
 
 class Company_freelancer
@@ -295,12 +414,12 @@ class startupUser{
           cout<<"Enter your Contact No:";
           cin>>contact;
         }
-        while(checkcontact(contact));
+        while(checkcontact_startup(contact));
         do{
           cout<<"Enter your email ID:";
           cin>>emailid;
         }
-        while(checkemailid(emailid));
+        while(checkemailid_startup(emailid));
         do{
           cout<<"Enter your age:";
           cin>>age;
@@ -420,7 +539,7 @@ class admin:public Company_freelancer,public startupUser
                    for(int k=0;k<nn;k++)
                       all[k]=asd[k];
                    std::string attempt_password(all);
-
+                    cout<<attempt_password<<endl;
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
