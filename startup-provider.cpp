@@ -26,6 +26,20 @@ using namespace std;
   }
 }
 
+int checkyear(string c)
+{
+  for(int i=0;i<c.size();i++)vhjmk@
+  {
+    if((!((c[i]-0>=48 && c[i]-0<=57)))&&(c.size()==4))
+  {
+    cout<<"Age can contain only numbers."<<endl;
+    cout<<"Please enter correct age"<<endl;
+    cout<<endl;
+    return 1;
+  }
+}
+}
+
   int checkcontact_startup(string c)
   {
     int flag=0;
@@ -313,7 +327,7 @@ class Company_freelancer
         cout<<"Enter the year of establishment:";
         cin>>established;
       }
-      while(checkage(established));
+      while(checkyear(established));
       do{
         cout<<"Enter City:";
         cin>>cityofestablishment;
@@ -539,7 +553,7 @@ class admin:public Company_freelancer,public startupUser
                    for(int k=0;k<nn;k++)
                       all[k]=asd[k];
                    std::string attempt_password(all);
-                    cout<<attempt_password<<endl;
+
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
