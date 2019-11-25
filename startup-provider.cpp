@@ -123,8 +123,8 @@ class Company_freelancer
         string lastName;
         string emailid;
         string contact;
-        string age;
-        string city;
+        string established;
+        string cityofestablishment;
         string state;
         string interest_tag;
     public:
@@ -133,8 +133,30 @@ class Company_freelancer
     public:
     void set_uid()
     {
+        int n,i;
+        while(1)
+        {
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
+        FILE* fp;
+        fp = fopen("companydatabase.txt","r+");
+        //string c_uidl;
+        char c_uid[25],c_pass[25];
+        fscanf(fp,"%d",&n);
+        for(i=0;i<n;i++)
+        {
+            fscanf(fp,"%s%s",c_uid,c_pass);
+            std::string c_uidm(c_uid);
+            if(uid == c_uidm)
+            {
+                cout<<"this uid is already in use,try again"<<endl;
+                break;
+            }
+        }
+        if(i==n)
+            break;
+        fclose(fp);
+        }
         cout<<"enter the password you want to set"<<endl;
         for(int i=0;i<1000;i++)
         {
@@ -169,15 +191,15 @@ class Company_freelancer
       }
       while(checkemailid(emailid));
       do{
-        cout<<"Enter your age:";
-        cin>>age;
+        cout<<"Enter the year of establishment:";
+        cin>>established;
       }
-      while(checkage(age));
+      while(checkage(established));
       do{
         cout<<"Enter City:";
-        cin>>city;
+        cin>>cityofestablishment;
       }
-      while(checkcity(city));
+      while(checkcity(cityofestablishment));
       do{
         cout<<"Enter State:";
         cin>>state;
@@ -197,8 +219,8 @@ class Company_freelancer
         cout<<lastName<<endl;
         cout<<emailid<<endl;
         cout<<contact<<endl;
-        cout<<age<<endl;
-        cout<<city<<endl;
+        cout<<established<<endl;
+        cout<<cityofestablishment<<endl;
         cout<<state<<endl;
         cout<<interest_tag<<endl<<endl;
     }
@@ -221,8 +243,31 @@ class startupUser{
     public:
     void set_uid()
     {
+        int n,i;
+        while(1)
+        {
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
+        FILE* fp;
+        fp = fopen("startupdatabase.txt","r+");
+        //string c_uidl;
+        char c_uid[25],c_pass[25];
+        fscanf(fp,"%d",&n);
+        for(i=0;i<n;i++)
+        {
+            fscanf(fp,"%s%s",c_uid,c_pass);
+            std::string c_uidm(c_uid);
+            if(uid == c_uidm)
+            {
+                cout<<"this uid is already in use,try again"<<endl;
+                break;
+            }
+        }
+        if(i==n)
+            break;
+
+        fclose(fp);
+        }
         cout<<"enter the password you want to set"<<endl;
         for(int i=0;i<1000;i++)
         {
@@ -317,7 +362,7 @@ class admin:public Company_freelancer,public startupUser
                 std::string comp_name5(s15);
                 std::string comp_name6(s16);
                 std::string comp_name7(s17);
-                cout<<comp_name1<<" "<<comp_name2<<" "<<comp_name3<<" "<<comp_name4<<" "<<comp_name5<<" "<<comp_name6<<" "<<comp_name7<<endl;
+                cout<<"Name of the company: "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the company is: "<<comp_name3<<endl<<"Contact no. of company is: "<<comp_name4<<endl<<"Established in: "<<comp_name5<<", "<<"State: "<<comp_name6<<", "<<comp_name7<<endl;
             }
         }
         fclose(fp);
@@ -496,7 +541,7 @@ while(1)
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
                     fp = fopen("companyregdetails.txt","a");
-                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.age.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.established.c_str(),B.cityofestablishment.c_str(),B.state.c_str(),B.interest_tag.c_str());
                     fclose(fp);
                     break;
         	}
