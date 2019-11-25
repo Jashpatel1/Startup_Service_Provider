@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #include<stdlib.h>
-#include<conio.h>
 using namespace std;
 
   int checknumber(string c)
@@ -123,8 +122,8 @@ class Company_freelancer
         string lastName;
         string emailid;
         string contact;
-        string age;
-        string city;
+        string established;
+        string cityofestablishment;
         string state;
         string interest_tag;
     public:
@@ -133,18 +132,32 @@ class Company_freelancer
     public:
     void set_uid()
     {
+        int n,i;
+        while(1)
+        {
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
-        cout<<"enter the password you want to set"<<endl;
-        for(int i=0;i<1000;i++)
+        FILE* fp;
+        fp = fopen("companydatabase.txt","r+");
+        //string c_uidl;
+        char c_uid[25],c_pass[25];
+        fscanf(fp,"%d",&n);
+        for(i=0;i<n;i++)
         {
-          char c=getch();
-          if(c=='\r')
+            fscanf(fp,"%s%s",c_uid,c_pass);
+            std::string c_uidm(c_uid);
+            if(uid == c_uidm)
+            {
+                cout<<"this uid is already in use,try again"<<endl;
+                break;
+            }
+        }
+        if(i==n)
             break;
-          cout<<"*";
-          password[i]=c;
-         }
-         cout<<endl;
+        fclose(fp);
+        }
+        cout<<"enter the password you want to set"<<endl;
+        cin>>password;
     }
     void getInfo()
     {
@@ -169,15 +182,15 @@ class Company_freelancer
       }
       while(checkemailid(emailid));
       do{
-        cout<<"Enter your age:";
-        cin>>age;
+        cout<<"Enter the year of establishment of company "<<firstName<<" "<<lastName<<": "<<endl;
+        cin>>established;
       }
-      while(checkage(age));
+      while(checkage(established));
       do{
-        cout<<"Enter City:";
-        cin>>city;
+        cout<<"Enter the city with main office of company:";
+        cin>>cityofestablishment;
       }
-      while(checkcity(city));
+      while(checkcity(cityofestablishment));
       do{
         cout<<"Enter State:";
         cin>>state;
@@ -197,8 +210,8 @@ class Company_freelancer
         cout<<lastName<<endl;
         cout<<emailid<<endl;
         cout<<contact<<endl;
-        cout<<age<<endl;
-        cout<<city<<endl;
+        cout<<established<<endl;
+        cout<<cityofestablishment<<endl;
         cout<<state<<endl;
         cout<<interest_tag<<endl<<endl;
     }
@@ -221,18 +234,33 @@ class startupUser{
     public:
     void set_uid()
     {
+        int n,i;
+        while(1)
+        {
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
-        cout<<"enter the password you want to set"<<endl;
-        for(int i=0;i<1000;i++)
+        FILE* fp;
+        fp = fopen("startupdatabase.txt","r+");
+        //string c_uidl;
+        char c_uid[25],c_pass[25];
+        fscanf(fp,"%d",&n);
+        for(i=0;i<n;i++)
         {
-          char c=getch();
-          if(c=='\r')
+            fscanf(fp,"%s%s",c_uid,c_pass);
+            std::string c_uidm(c_uid);
+            if(uid == c_uidm)
+            {
+                cout<<"this uid is already in use,try again"<<endl;
+                break;
+            }
+        }
+        if(i==n)
             break;
-          cout<<"*";
-          password[i]=c;
-         }
-         cout<<endl;
+
+        fclose(fp);
+        }
+        cout<<"enter the password you want to set"<<endl;
+        cin>>password;
     }
     void getInfo()
     {
@@ -293,7 +321,7 @@ class startupUser{
 };
 
 class admin:public Company_freelancer,public startupUser
-{
+{//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
     public:
     string attempt_uid;
     string attempt_password;
@@ -308,6 +336,7 @@ class admin:public Company_freelancer,public startupUser
         {
             fscanf(fp,"%s%s%s%s%s%s%s%s",s11,s12,s13,s14,s15,s16,s17,s18);
             std::string ver_interest(s18);
+            //cout<<ver_interest<<endl;
             if(ver_interest == interest)
             {
                 std::string comp_name1(s11);
@@ -317,23 +346,11 @@ class admin:public Company_freelancer,public startupUser
                 std::string comp_name5(s15);
                 std::string comp_name6(s16);
                 std::string comp_name7(s17);
-                cout<<comp_name1<<" "<<comp_name2<<" "<<comp_name3<<" "<<comp_name4<<" "<<comp_name5<<" "<<comp_name6<<" "<<comp_name7<<endl;
+                cout<<"Name of the company: "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the company is: "<<comp_name3<<endl<<"Contact no. of company is: "<<comp_name4<<endl<<"Established in: "<<comp_name5<<", "<<"State: "<<comp_name6<<", "<<comp_name7<<endl;
             }
         }
         fclose(fp);
     }
-    struct Company1
-    {
-      string firstName;
-      string lastName;
-      string emailid;
-      string contact;
-      string age;
-      string city;
-      string state;
-      string interest_tag;
-
-    };
         void getUid()
         {
             cout<<"enter the UID of your account"<<endl;
@@ -349,39 +366,23 @@ class admin:public Company_freelancer,public startupUser
             int n;
             fscanf(fp,"%d",&n);
             int i;
+            //cout<<n<<endl;
             for(i=0;i<n;i++)
             {
                 fscanf(fp,"%s%s",cuid,cpass);
+                //cout<<cuid<<" "<<cpass<<endl;
                 std::string Check_uid(cuid);
                 std::string Check_pass(cpass);
                 if(attempt_uid == Check_uid)
                 {
-                  cout<<"enter password"<<endl;
-                  char asd[100];
-                  int nn;
-                  for(int j=0;j<1000;j++)
-                  {
-                    char c=getch();
-                    if(c=='\r')
-                    {
-                      nn=j;
-                      break;
-                    }
-                    cout<<"*";
-                    asd[j]=c;
-                   }
-                   cout<<endl;
-                   char all[nn];
-                   for(int k=0;k<nn;k++)
-                      all[k]=asd[k];
-                   std::string attempt_password(all);
-
+                    cout<<"enter password"<<endl;
+                    cin>>attempt_password;
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
                      break;
                     }
-                }
+                }//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
             }
             if(i == n)
                 cout<<"Error: Uid "<<Check_uid<<" invalid"<<endl;
@@ -398,61 +399,110 @@ class admin:public Company_freelancer,public startupUser
             int n;
             fscanf(fp,"%d",&n);
             int i;
+            //cout<<n<<endl;
             for(i=0;i<n;i++)
             {
                 fscanf(fp,"%s%s",cuid,cpass);
+                //cout<<cuid<<" "<<cpass<<endl;
                 std::string Check_uid(cuid);
                 std::string Check_pass(cpass);
                 if(attempt_uid == Check_uid)
                 {
-                  cout<<"enter password"<<endl;
-                  char asd[100];
-                  int nn;
-                  for(int j=0;j<1000;j++)
-                  {
-                    char c=getch();
-                    if(c=='\r')
-                    {
-                      nn=j;
-                      break;
-                    }
-                    cout<<"*";
-                    asd[j]=c;
-                   }
-                   cout<<endl;
-                   char all[nn];
-                   for(int k=0;k<nn;k++)
-                      all[k]=asd[k];
-                   std::string attempt_password(all);
-
+                    cout<<"enter password"<<endl;
+                    cin>>attempt_password;
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
+                     //string interest,iter;
                      char interest1[25],iter1[25];
                      fscanf(fpl,"%s",iter1);
                      for(int j=0;j<i;j++)
                          for(int k=0;k<8;k++)
                             fscanf(fpl,"%s",iter1);
+
+                     //std::string iter(iter1);
+                     //cout<<iter<<endl;
+
                      for(int j=0;j<8;j++)
                         fscanf(fpl,"%s",interest1);
+
+                        //fscanf(fpl,"%s",interest1);
                         std::string interest(interest1);
                         cout<<interest<<endl;
                      fclose(fp);
                      fclose(fpl);
-                     cout<<"the details of company interested in "<<interest<<"are as follows"<<endl;
+                     cout<<"the details of company interested in "<<interest<<" are as follows"<<endl;
                      Display(interest);
                      break;
                     }
-                }
+                }//https://www.google.com/search?client=ubuntu&channel=fs&q=gma&ie=utf-8&oe=utf-8
             }
             if(i == n)
                 cout<<"Error: Uid "<<Check_uid<<" invalid"<<endl;
         }
 };
+/*
+void admin::Display(string interest)
+{
+            FILE *fp;
+            fp = fopen("companyregdetails.txt","r+");
 
+
+            /*ofstream fout;
+            string eashan;
+            fout.open("textfile.txt");
+            std::map<string,std::vector<pair<string,int> > >m;
+            while(fout)
+            {
+                getline(cin,eashan);
+                if(eashan=="-1")
+                {
+                    break;
+                    string temp="";
+                std::vector<string> v;
+                for(int i=0;i<eashan.length();i++)
+                {
+
+                    if(eashan[i]==' ')
+                    {
+                        if(temp!=" ")
+                        v.push_back(temp);
+                        temp="";
+                    }
+                    else
+                        temp+=eashan[i];
+                }
+                for(int i=0;i<v.size();i++)
+                {
+                    if(v[i]=="marketing")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="accounting")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="technical")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                    else if(v[i]=="advertisement")
+                    {
+                        m[v[i]].push_back(make_pair(v[0],0));
+                        break;
+                    }
+                }
+            }
+            fout.close();
+            fclose(fp);*/
 
 int main()
 {
+
+  system("python test1.py");
     string c;
     Company_freelancer B;
     startupUser A;
@@ -476,9 +526,7 @@ while(1)
             		B.set_uid();
             		B.getInfo();
             		B.printfInfo();
-                char s[]="python registermail.py ";
-                strcat(s,B.emailid.c_str());
-                system(s);
+
             		cout<<"congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp;
             		FILE *fpl;
@@ -486,8 +534,10 @@ while(1)
                     fpl = fopen("companyregdetails.txt","r+");
                     int qw;
             		fscanf(fp,"%d",&qw);
+            		//cout<<qw<<endl;
             		fseek(fp,0,SEEK_SET);
             		fseek(fpl,0,SEEK_SET);
+            		//cout<<qw<<endl;
             		fprintf(fpl,"%d\n",qw+1);
             		fprintf(fp,"%d\n",qw+1);
             		fclose(fp);
@@ -496,7 +546,7 @@ while(1)
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
                     fp = fopen("companyregdetails.txt","a");
-                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.age.c_str(),B.city.c_str(),B.state.c_str(),B.interest_tag.c_str());
+                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.established.c_str(),B.cityofestablishment.c_str(),B.state.c_str(),B.interest_tag.c_str());
                     fclose(fp);
                     break;
         	}
@@ -505,9 +555,6 @@ while(1)
        		        A.set_uid();
             		A.getInfo();
             		A.printfInfo();
-                char s[]="python registermail.py ";
-                strcat(s,A.emailid.c_str());
-                system(s);
             		cout<<"congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp,*fpl;
             		fp = fopen("startupdatabase.txt","r+");
