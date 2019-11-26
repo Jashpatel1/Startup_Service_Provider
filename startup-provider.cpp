@@ -28,7 +28,7 @@ using namespace std;
 
 int checkyear(string c)
 {
-  for(int i=0;i<c.size();i++)vhjmk@
+  for(int i=0;i<c.size();i++)
   {
     if((!((c[i]-0>=48 && c[i]-0<=57)))&&(c.size()==4))
   {
