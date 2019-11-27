@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 #include<stdlib.h>
 #include<conio.h>
-#include "check.cpp"
+#include"check.cpp"
 using namespace std;
 
-char blue[] = { 0x1b, '[', '1', ';', '3', '4', 'm', 0 };
+
 
 class Company_freelancer
 {
@@ -17,6 +17,7 @@ class Company_freelancer
         string cityofestablishment;
         string state;
         string interest_tag;
+        int votes;
     public:
         string uid;
         string password;
@@ -26,10 +27,11 @@ class Company_freelancer
         int n,i;
         while(1)
         {
-        cout<<"Enter the UID you want to set:"<<endl;
+        cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         FILE* fp;
         fp = fopen("companydatabase.txt","r+");
+        //string c_uidl;
         char c_uid[25],c_pass[25];
         fscanf(fp,"%d",&n);
         for(i=0;i<n;i++)
@@ -57,7 +59,6 @@ class Company_freelancer
          }
          cout<<endl;
     }
-
     void getInfo()
     {
       do{
@@ -140,6 +141,7 @@ class startupUser{
         cin>>uid;
         FILE* fp;
         fp = fopen("startupdatabase.txt","r+");
+        //string c_uidl;
         char c_uid[25],c_pass[25];
         fscanf(fp,"%d",&n);
         for(i=0;i<n;i++)
@@ -158,15 +160,16 @@ class startupUser{
         fclose(fp);
         }
         cout<<"enter the password you want to set"<<endl;
-        for(int i=0;i<1000;i++)
+        cin>>password;
+        /*for(int i=0;i<1000;i++)
         {
           char c=getch();
           if(c=='\r')
             break;
           cout<<"*";
           password[i]=c;
-         }
-         cout<<endl;
+         }*/
+         //cout<<endl;
     }
     void getInfo()
     {
@@ -233,14 +236,14 @@ class admin:public Company_freelancer,public startupUser
     string attempt_password;
     void Display(string interest)
     {
-        int n1;
+        int n1,votes1;
         char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
         FILE *fp;
         fp = fopen("companyregdetails.txt","r+");
         fscanf(fp,"%d",&n1);
         for(int i=0;i<n1;i++)
         {
-            fscanf(fp,"%s%s%s%s%s%s%s%s",s11,s12,s13,s14,s15,s16,s17,s18);
+            fscanf(fp,"%s%s%s%s%s%s%s%s%d",s11,s12,s13,s14,s15,s16,s17,s18,&votes1);
             std::string ver_interest(s18);
             if(ver_interest == interest)
             {
@@ -251,8 +254,41 @@ class admin:public Company_freelancer,public startupUser
                 std::string comp_name5(s15);
                 std::string comp_name6(s16);
                 std::string comp_name7(s17);
-                cout<<"Name of the company: "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the company is: "<<comp_name3<<endl<<"Contact no. of company is: "<<comp_name4<<endl<<"Established in: "<<comp_name5<<", "<<"City: "<<comp_name6<<", "<<comp_name7<<endl;
-                cout<<endl;
+                cout<<"Name of the company: "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the company is: "<<comp_name3<<endl<<"Contact no. of company is: "<<comp_name4<<endl<<"Established in: "<<comp_name5<<", "<<"State: "<<comp_name6<<", "<<comp_name7<<endl;
+            }
+        }
+        fclose(fp);
+    }
+
+
+    void voting(string interest)
+    {
+        int n1,votes1;
+        char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
+        FILE *fp;
+        fp = fopen("companyregdetails.txt","r+");
+        fscanf(fp,"%d",&n1);
+        for(int i=0;i<n1;i++)
+        {
+            fscanf(fp,"%s%s%s%s%s%s%s%s%d",s11,s12,s13,s14,s15,s16,s17,s18,&votes1);
+            std::string ver_interest(s18);
+            string reply;
+            if(ver_interest == interest)
+            {
+                std::string comp_name1(s11);
+                std::string comp_name2(s12);
+                std::string comp_name3(s13);
+                std::string comp_name4(s14);
+                std::string comp_name5(s15);
+                std::string comp_name6(s16);
+                std::string comp_name7(s17);
+                cout<<"Name of the company: "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the company is: "<<comp_name3<<endl<<"Contact no. of company is: "<<comp_name4<<endl<<"Established in: "<<comp_name5<<", "<<"State: "<<comp_name6<<", "<<comp_name7<<endl;
+                cout<<"do you want to vote for this company?(Y/N)"<<endl;
+                cin>>reply;
+                if(reply == "Y" || reply == "y")
+                    votes1++;
+                fseek(fp,-1,SEEK_CUR);
+                fprintf(fp,"%d",votes1);
             }
         }
         fclose(fp);
@@ -269,6 +305,32 @@ class admin:public Company_freelancer,public startupUser
       string interest_tag;
 
     };
+        void Display_startup(string interest)
+        {
+        int n1,votes1;
+        char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
+        FILE *fp;
+        fp = fopen("startupregdetails.txt","r+");
+        fscanf(fp,"%d",&n1);
+        for(int i=0;i<n1;i++)
+        {
+            fscanf(fp,"%s%s%s%s%s%s%s%s",s11,s12,s13,s14,s15,s16,s17,s18);
+            std::string ver_interest(s18);
+            if(ver_interest == interest)
+            {
+                std::string comp_name1(s11);
+                std::string comp_name2(s12);
+                std::string comp_name3(s13);
+                std::string comp_name4(s14);
+                std::string comp_name5(s15);
+                std::string comp_name6(s16);
+                std::string comp_name7(s17);
+                cout<<"Name of the startup-user : "<<comp_name1<<" "<<comp_name2<<endl<<"Email-id of the startup-user is: "<<comp_name3<<endl<<"Contact no. of startup-user is: "<<comp_name4<<endl<<"date of birth :"<<comp_name5<<endl<<"city: "<<comp_name6<<"state: "<<comp_name7<<endl;
+            }
+        }
+        fclose(fp);
+    }
+
         void getUid()
         {
             cout<<"enter the UID of your account"<<endl;
@@ -277,10 +339,12 @@ class admin:public Company_freelancer,public startupUser
         void check_pass_company()
         {
             FILE *fp;
+            FILE *fpl;
             string Check_uid;
             char cuid[25];
             char cpass[25];
             fp = fopen("companydatabase.txt","r");
+            fpl = fopen("companyregdetails.txt","r");
             int n;
             fscanf(fp,"%d",&n);
             int i;
@@ -292,7 +356,8 @@ class admin:public Company_freelancer,public startupUser
                 if(attempt_uid == Check_uid)
                 {
                   cout<<"enter password"<<endl;
-                  char asd[100];
+                  cin>>attempt_password;
+                  /*char asd[100];
                   int nn;
                   for(int j=0;j<1000;j++)
                   {
@@ -308,12 +373,29 @@ class admin:public Company_freelancer,public startupUser
                    cout<<endl;
                    char all[nn];
                    for(int k=0;k<nn;k++)
-                      all[k]=asd[k];
-                   std::string attempt_password(all);
+                      all[k]=asd[k];*/
+                   //std::string attempt_password(all);
 
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
+                    int n1;
+                    char interest1[25],iter1[25];
+                     fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<i;j++)
+                         for(int k=0;k<9;k++)
+                            fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<8;j++)
+                     {
+                         fscanf(fpl,"%s",interest1);
+                     }
+                     fscanf(fpl,"%d",&n1);
+                        std::string interest(interest1);
+                        cout<<interest<<endl;
+                     fclose(fp);
+                     fclose(fpl);
+                     Display_startup(interest);
+                     cout<<n1<<endl;
                      break;
                     }
                 }
@@ -341,7 +423,7 @@ class admin:public Company_freelancer,public startupUser
                 if(attempt_uid == Check_uid)
                 {
                   cout<<"enter password"<<endl;
-                  char asd[100];
+                  /*char asd[100];
                   int nn;
                   for(int j=0;j<1000;j++)
                   {
@@ -359,14 +441,11 @@ class admin:public Company_freelancer,public startupUser
                    for(int k=0;k<nn;k++)
                       all[k]=asd[k];
                    std::string attempt_password(all);
-
+                    */
+                    cin>>attempt_password;
                     if(attempt_password == Check_pass)
                     {
                      cout<<"password and uid verified"<<endl;
-                     system("pause");
-                     cout<<"Press any key to go to the dashboard"<<endl;
-
-                     system("cls");
                      char interest1[25],iter1[25];
                      fscanf(fpl,"%s",iter1);
                      for(int j=0;j<i;j++)
@@ -375,12 +454,12 @@ class admin:public Company_freelancer,public startupUser
                      for(int j=0;j<8;j++)
                         fscanf(fpl,"%s",interest1);
                         std::string interest(interest1);
-                        cout<<"Your interest lies in: "<<interest<<endl;
+                        cout<<interest<<endl;
                      fclose(fp);
                      fclose(fpl);
-                     cout<<"The details of company interested in "<<interest<<" are as follows:"<<endl;
-                     cout<<endl;
-                     Display(interest);
+                     cout<<"the details of company interested in "<<interest<<"are as follows"<<endl;
+                     //Display(interest);
+                     voting(interest);
                      break;
                     }
                 }
@@ -389,6 +468,8 @@ class admin:public Company_freelancer,public startupUser
                 cout<<"Error: Uid "<<Check_uid<<" invalid"<<endl;
         }
 };
+
+
 
 int main()
 {
@@ -399,30 +480,28 @@ int main()
     string answer;
 while(1)
 {
-    system ( "color 70" );
-    cout<<"Have you registered yet?(Y/N)"<<endl;
+    cout<<"have you registered yet?(Y/N)"<<endl;
     cin>>c;
-
     while(1)
     {
     if(c  == "N" || c == "n")
     {
-
-        cout<<"Do you want to register as company or startup-user"<<endl;
+        cout<<"do you want to register as company or startup-user"<<endl;
 	while(1)
 	{
         	string s;
         	cin>>s;
        	 	if(s == "company")
         	{
-                system ("cls");
             		B.set_uid();
             		B.getInfo();
+            		B.votes = 0;
+
             		B.printfInfo();
                 char s[]="python registermail.py ";
                 strcat(s,B.emailid.c_str());
                 system(s);
-            		cout<<"Congratulations, you have successfully registered here on our website"<<endl;
+            		cout<<"congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp;
             		FILE *fpl;
             		fp = fopen("companydatabase.txt","r+");
@@ -439,15 +518,13 @@ while(1)
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
                     fp = fopen("companyregdetails.txt","a");
-                    fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.established.c_str(),B.cityofestablishment.c_str(),B.state.c_str(),B.interest_tag.c_str());
+                    fprintf(fp,"%s %s %s %s %s %s %s %s %d\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.established.c_str(),B.cityofestablishment.c_str(),B.state.c_str(),B.interest_tag.c_str(),B.votes);
                     fclose(fp);
                     break;
-                    system("cls");
         	}
-        	else if(s == "startup-user")
+        	if(s == "startup-user")
         	{
-                system("cls");
-       		      A.set_uid();
+       		        A.set_uid();
             		A.getInfo();
             		A.printfInfo();
                 char s[]="python registermail.py ";
@@ -471,12 +548,7 @@ while(1)
                     fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.age.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
                     fclose(fp);
                     break;
-                    system("cls");
         	}
-          else
-          {
-            cout<<"Choose company or startup-user"<<endl;
-          }
 	}
 	break;
     	}
@@ -485,20 +557,17 @@ while(1)
 	while(1)
 	{
 		string s;
-		cout<<"Are you a company/freelancer or startup-user"<<endl;
+		cout<<"are you a company/freelancer or startup-user"<<endl;
 		cin>>s;
 		if(s == "company")
 		{
-      system("cls");
         		S.getUid();
                 S.check_pass_company();
-                system("cls");
 
 			break;
 		}
 		if(s == "startup-user")
 		{
-      system("cls");
 			S.getUid();
 			S.check_pass_startup();
 			break;
@@ -507,11 +576,10 @@ while(1)
 	break;
     }
 }
-    cout<<"Do you want to start again?(Y/N)"<<endl;
+    cout<<"do you want to register again?(Y/N)"<<endl;
     cin>>answer;
     if(answer == "N" || answer == "n")
         break;
-        system("cls");
 }
     return 0;
 }
