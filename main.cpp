@@ -259,8 +259,8 @@ class admin:public Company_freelancer,public startupUser
         }
         fclose(fp);
     }
-    
-void get_email_company(string uid)
+
+    void get_email_company(string uid)
     {
             FILE *fp;
             FILE *fpl;
@@ -291,7 +291,14 @@ void get_email_company(string uid)
                      }
                      fscanf(fpl,"%d",&n1);
                         std::string interest(interest1);
-                        cout<<"the email for this uid  is "<<interest<<endl;
+                        cout<<"Forgot password "<<endl;
+
+                        char s[]="python forgotpassword.py ";
+                        strcat(s,interest.c_str());
+                        string s1=" ";
+                        strcat(s,s1.c_str());
+                        strcat(s,cpass);
+                        system(s);
                      fclose(fp);
                      fclose(fpl);
                     break;
@@ -300,44 +307,44 @@ void get_email_company(string uid)
     }
 
     void get_email_startup(string uid)
-    {
-            FILE *fp;
-            FILE *fpl;
-            string Check_uid;
-            char cuid[25];
-            char cpass[25];
-            fp = fopen("startupatabase.txt","r");
-            fpl = fopen("startupregdetails.txt","r");
-            int n;
-            fscanf(fp,"%d",&n);
-            int i;
-            for(i=0;i<n;i++)
+{
+        FILE *fp;
+        FILE *fpl;
+        string Check_uid;
+        char cuid[25];
+        char cpass[25];
+        fp = fopen("startupatabase.txt","r");
+        fpl = fopen("startupregdetails.txt","r");
+        int n;
+        fscanf(fp,"%d",&n);
+        int i;
+        for(i=0;i<n;i++)
+        {
+            fscanf(fp,"%s%s",cuid,cpass);
+            std::string Check_uid(cuid);
+            std::string Check_pass(cpass);
+            if(uid == Check_uid)
             {
-                fscanf(fp,"%s%s",cuid,cpass);
-                std::string Check_uid(cuid);
-                std::string Check_pass(cpass);
-                if(uid == Check_uid)
-                {
-                     int n1;
-                     char interest1[25],iter1[25];
-                     fscanf(fpl,"%s",iter1);
-                     for(int j=0;j<i;j++)
-                         for(int k=0;k<8;k++)
-                            fscanf(fpl,"%s",iter1);
-                     for(int j=0;j<3;j++)
-                     {
-                         fscanf(fpl,"%s",interest1);
-                     }
-                     fscanf(fpl,"%d",&n1);
-                        std::string interest(interest1);
-                        cout<<interest<<endl;
-                     fclose(fp);
-                     fclose(fpl);
-                    break;
-                }
+                 int n1;
+                 char interest1[25],iter1[25];
+                 fscanf(fpl,"%s",iter1);
+                 for(int j=0;j<i;j++)
+                     for(int k=0;k<8;k++)
+                        fscanf(fpl,"%s",iter1);
+                 for(int j=0;j<3;j++)
+                 {
+                     fscanf(fpl,"%s",interest1);
+                 }
+                 fscanf(fpl,"%d",&n1);
+                    std::string interest(interest1);
+                    cout<<interest<<endl;
+                 fclose(fp);
+                 fclose(fpl);
+                break;
             }
-    }
-    
+        }
+}
+
     void voting(string interest)
     {
         int n1,votes1;
@@ -363,21 +370,13 @@ void get_email_company(string uid)
 
                 cout<<"Do you want to vote for this company?(Y/N)"<<endl;
                 cin>>reply;
-                 // if(reply == 'Y' || reply == 'y')
-                 // {
-                 //      cout<<"hi"<<endl;
-                 //      votes1++;
-                 //      char s[]="python votemail.py ";
-                 //      strcat(s,comp_name3.c_str());
-                 //      cout<<s<<endl;
-                 //      char buffer[1];
-                 //      string str = itoa(votes1,buffer,10);
-                 //      string str = string(buffer);
-                 //      cout<<str<<endl;
-                 //      strcat(s,str.c_str());
-                 //      cout<<s;
-                 //      system(s);
-                 // }
+                 if(reply == 'Y' || reply == 'y')
+                 {
+                      votes1++;
+                      char s[]="python votemail.py ";
+                      strcat(s,comp_name3.c_str());
+                      system(s);
+                 }
                  fseek(fp,-1,SEEK_CUR);
                  fprintf(fp,"%d",votes1);
             }
@@ -457,19 +456,11 @@ void get_email_company(string uid)
                      cout<<"password and uid verified"<<endl;
                      break;
                     }
-                    // else
-                    // {
-                    //   char ch;
-                    //   cout<<"Forgot password?(Y or N)"<<endl;
-                    //   cin>>ch;
-                    //   if(ch=='Y' || ch=='y')
-                    //   {
-                    //     char s[]="python registermail.py ";
-                    //     strcat(s,B.emailid.c_str());
-                    //     system(s);
-                    //   }
-                    //
-                    // }
+                    else
+                    {
+                      get_email_company(attempt_uid);
+                      break;
+                    }
                 }
             }
 
@@ -647,7 +638,6 @@ while(1)
       system("cls");
         		S.getUid();
                 S.check_pass_company();
-                system("cls");
 
 			break;
 		}
