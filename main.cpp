@@ -259,8 +259,85 @@ class admin:public Company_freelancer,public startupUser
         }
         fclose(fp);
     }
+    
+void get_email_company(string uid)
+    {
+            FILE *fp;
+            FILE *fpl;
+            string Check_uid;
+            char cuid[25];
+            char cpass[25];
+            fp = fopen("companydatabase.txt","r");
+            fpl = fopen("companyregdetails.txt","r");
+            int n;
+            fscanf(fp,"%d",&n);
+            int i;
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s",cuid,cpass);
+                std::string Check_uid(cuid);
+                std::string Check_pass(cpass);
+                if(uid == Check_uid)
+                {
+                     int n1;
+                     char interest1[25],iter1[25];
+                     fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<i;j++)
+                         for(int k=0;k<9;k++)
+                            fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<3;j++)
+                     {
+                         fscanf(fpl,"%s",interest1);
+                     }
+                     fscanf(fpl,"%d",&n1);
+                        std::string interest(interest1);
+                        cout<<"the email for this uid  is "<<interest<<endl;
+                     fclose(fp);
+                     fclose(fpl);
+                    break;
+                }
+            }
+    }
 
-
+    void get_email_startup(string uid)
+    {
+            FILE *fp;
+            FILE *fpl;
+            string Check_uid;
+            char cuid[25];
+            char cpass[25];
+            fp = fopen("startupatabase.txt","r");
+            fpl = fopen("startupregdetails.txt","r");
+            int n;
+            fscanf(fp,"%d",&n);
+            int i;
+            for(i=0;i<n;i++)
+            {
+                fscanf(fp,"%s%s",cuid,cpass);
+                std::string Check_uid(cuid);
+                std::string Check_pass(cpass);
+                if(uid == Check_uid)
+                {
+                     int n1;
+                     char interest1[25],iter1[25];
+                     fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<i;j++)
+                         for(int k=0;k<8;k++)
+                            fscanf(fpl,"%s",iter1);
+                     for(int j=0;j<3;j++)
+                     {
+                         fscanf(fpl,"%s",interest1);
+                     }
+                     fscanf(fpl,"%d",&n1);
+                        std::string interest(interest1);
+                        cout<<interest<<endl;
+                     fclose(fp);
+                     fclose(fpl);
+                    break;
+                }
+            }
+    }
+    
     void voting(string interest)
     {
         int n1,votes1;
