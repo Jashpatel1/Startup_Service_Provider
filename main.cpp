@@ -3,8 +3,8 @@
 #include<stdio.h>
 #include<conio.h>
 #include<string>
-#include "check.cpp"
-#include "adminfunction.cpp"
+#include "src/check.cpp"
+#include "src/adminfunction.cpp"
 using namespace std;
 
 class Company_freelancer
@@ -31,7 +31,7 @@ class Company_freelancer
         cout<<"Enter the UID you want to set:"<<endl;
         cin>>uid;
         FILE* fp;
-        fp = fopen("companydatabase.txt","r+");
+        fp = fopen("src/database/companydatabase.txt","r+");
         char c_uid[25],c_pass[25];
         fscanf(fp,"%d",&n);
         for(i=0;i<n;i++)
@@ -141,7 +141,7 @@ class startupUser{
         cout<<"enter the UID you want to set"<<endl;
         cin>>uid;
         FILE* fp;
-        fp = fopen("startupdatabase.txt","r+");
+        fp = fopen("/src/databse/startupdatabase.txt","r+");
         char c_uid[25],c_pass[25];
         fscanf(fp,"%d",&n);
         for(i=0;i<n;i++)
@@ -245,7 +245,7 @@ class admin:public Company_freelancer,public startupUser
             string Check_uid;
             char cuid[25];
             char cpass[25];
-            fp = fopen("companydatabase.txt","r");
+            fp = fopen("src/databse/companydatabase.txt","r");
             int n;
             fscanf(fp,"%d",&n);
             int i;
@@ -305,8 +305,8 @@ class admin:public Company_freelancer,public startupUser
             FILE *fpl;
             char cuid[25];
             char cpass[25];
-            fp = fopen("startupdatabase.txt","r");
-            fpl = fopen("startupregdetails.txt","r");
+            fp = fopen("src/databse/startupdatabase.txt","r");
+            fpl = fopen("src/databse/startupregdetails.txt","r");
             int n;
             fscanf(fp,"%d",&n);
             int i;
@@ -413,8 +413,8 @@ while(1)
             		cout<<"Congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp;
             		FILE *fpl;
-            		fp = fopen("companydatabase.txt","r+");
-                    fpl = fopen("companyregdetails.txt","r+");
+            		fp = fopen("src/databse/companydatabase.txt","r+");
+                    fpl = fopen("src/databse/companyregdetails.txt","r+");
                     int qw;
             		fscanf(fp,"%d",&qw);
             		fseek(fp,0,SEEK_SET);
@@ -423,10 +423,10 @@ while(1)
             		fprintf(fp,"%d\n",qw+1);
             		fclose(fp);
             		fclose(fpl);
-            		fp = fopen("companydatabase.txt","a");
+            		fp = fopen("src/databse/companydatabase.txt","a");
             		fprintf(fp,"%s %s\n",B.uid.c_str(),B.password.c_str());
             		fclose(fp);
-                    fp = fopen("companyregdetails.txt","a");
+                    fp = fopen("src/databse/companyregdetails.txt","a");
                     fprintf(fp,"%s %s %s %s %s %s %s %s\n",B.firstName.c_str(),B.lastName.c_str(),B.emailid.c_str(),B.contact.c_str(),B.established.c_str(),B.cityofestablishment.c_str(),B.state.c_str(),B.interest_tag.c_str());
                     fclose(fp);
                     break;
@@ -443,8 +443,8 @@ while(1)
                 system(s);
             		cout<<"congratulations, you have successfully registered here on our website"<<endl;
             		FILE *fp,*fpl;
-            		fp = fopen("startupdatabase.txt","r+");
-            		fpl = fopen("startupregdetails.txt","r+");
+            		fp = fopen("src/databse/startupdatabase.txt","r+");
+            		fpl = fopen("src/databse/startupregdetails.txt","r+");
             		int n;
             		fscanf(fp,"%d",&n);
             		fseek(fp,0,SEEK_SET);
@@ -452,10 +452,10 @@ while(1)
             		fprintf(fp,"%d\n",n+1);
             		fprintf(fpl,"%d\n",n+1);
             		fclose(fp);
-            		fp = fopen("startupdatabase.txt","a");
+            		fp = fopen("src/databse/startupdatabase.txt","a");
            	 	    fprintf(fp,"%s %s\n",A.uid.c_str(),A.password.c_str());
             		fclose(fp);
-                    fp = fopen("startupregdetails.txt","a");
+                    fp = fopen("src/databse/startupregdetails.txt","a");
                     fprintf(fp,"%s %s %s %s %s %s %s %s\n",A.firstName.c_str(),A.lastName.c_str(),A.emailid.c_str(),A.contact.c_str(),A.age.c_str(),A.city.c_str(),A.state.c_str(),A.interest_tag.c_str());
                     fclose(fp);
                     break;
