@@ -10,7 +10,7 @@ void Display(string interest)
     int n1,votes1;
     char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
     FILE *fp;
-    fp = fopen("databse/companyregdetails.txt","r+");
+    fp = fopen("database/companyregdetails.txt","r+");
     fscanf(fp,"%d",&n1);
     for(int i=0;i<n1;i++)
     {
@@ -38,8 +38,8 @@ void get_email_company(string uid)
         string Check_uid;
         char cuid[25];
         char cpass[25];
-        fp = fopen("databse/companydatabase.txt","r");
-        fpl = fopen("databse/companyregdetails.txt","r");
+        fp = fopen("database/companydatabase.txt","r");
+        fpl = fopen("database/companyregdetails.txt","r");
         int n;
         fscanf(fp,"%d",&n);
         int i;
@@ -84,8 +84,8 @@ void get_email_startup(string uid)
     string Check_uid;
     char cuid[25];
     char cpass[25];
-    fp = fopen("databse/startupatabase.txt","r");
-    fpl = fopen("databse/startupregdetails.txt","r");
+    fp = fopen("database/startupatabase.txt","r");
+    fpl = fopen("database/startupregdetails.txt","r");
     int n;
     fscanf(fp,"%d",&n);
     int i;
@@ -128,7 +128,7 @@ void voting(string interest)
     int n1,votes1;
     char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
     FILE *fp;
-    fp = fopen("databse/companyregdetails.txt","r+");
+    fp = fopen("database/companyregdetails.txt","r+");
     fscanf(fp,"%d",&n1);
     for(int i=0;i<n1;i++)
     {
@@ -166,7 +166,7 @@ void voting(string interest)
     int n1,votes1;
     char s10[25],s11[25],s12[25],s13[25],s14[25],s15[25],s16[25],s17[25],s18[25];
     FILE *fp;
-    fp = fopen("databse/startupregdetails.txt","r+");
+    fp = fopen("database/startupregdetails.txt","r+");
     fscanf(fp,"%d",&n1);
     for(int i=0;i<n1;i++)
     {
